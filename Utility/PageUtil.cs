@@ -1,10 +1,13 @@
-﻿using System;
+﻿// Developed by Softeq Development Corporation
+// http://www.softeq.com
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Softeq.NoName.Components.QueryUtil.Utility
+namespace Softeq.QueryUtils
 {
     public static class PageUtil
     {

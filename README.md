@@ -1,6 +1,6 @@
-# Serilog extention
+# Query Utils
 
-Extensions for IQueryable to perform Filter, Paging, Sorting operations
+Query Utils extensions for IQueryable to perform Paging, Filer, Sorting
 
 ## About
 
@@ -14,4 +14,4 @@ We welcome any contributions.
 
 ## License
 
-The Paging Query project is available for free use, as described by the [LICENSE](/LICENSE) (MIT).
+The Query Utils project is available for free use, as described by the [LICENSE](/LICENSE) (MIT).

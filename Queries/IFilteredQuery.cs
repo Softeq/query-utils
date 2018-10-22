@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// Developed by Softeq Development Corporation
+// http://www.softeq.com
 
-namespace Softeq.NoName.Components.QueryUtil.Queries
+using System.Collections.Generic;
+
+namespace Softeq.QueryUtils
 {
     public interface IFilteredQuery
     {

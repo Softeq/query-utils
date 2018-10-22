@@ -1,4 +1,7 @@
-﻿namespace Softeq.NoName.Components.QueryUtil.Queries
+﻿// Developed by Softeq Development Corporation
+// http://www.softeq.com
+
+namespace Softeq.QueryUtils
 {
     public interface IPagedQuery
     {

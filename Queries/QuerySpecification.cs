@@ -1,9 +1,11 @@
-﻿using System;
+﻿// Developed by Softeq Development Corporation
+// http://www.softeq.com
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Softeq.NoName.Components.QueryUtil.Queries
+namespace Softeq.QueryUtils
 {
     public class QuerySpecification<TEntity>
     {

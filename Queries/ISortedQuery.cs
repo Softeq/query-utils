@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Developed by Softeq Development Corporation
+// http://www.softeq.com
 
-namespace Softeq.NoName.Components.QueryUtil.Queries
+namespace Softeq.QueryUtils
 {
     public interface ISortedQuery
     {
