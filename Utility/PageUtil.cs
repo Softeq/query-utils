@@ -64,5 +64,28 @@ namespace Softeq.QueryUtils
                 TotalNumberOfPages = totalPageCount
             };
         }
+
+        public static PagedResults<T> CreatePagedResults<T>(
+            IEnumerable<T> response,
+            int page,
+            int pageSize)
+        {
+            var skipAmount = pageSize * (page - 1);
+
+            var projection = response.Skip(skipAmount).Take(pageSize);
+
+            var totalNumberOfRecords = response.Count();
+
+            var mod = totalNumberOfRecords % pageSize;
+            var totalPageCount = (totalNumberOfRecords / pageSize) + (mod == 0 ? 0 : 1);
+
+            return new PagedResults<T>
+            {
+                Results = projection,
+                PageNumber = page,
+                PageSize = projection.Count(),
+                TotalNumberOfPages = totalPageCount
+            };
+        }
     }
 }
