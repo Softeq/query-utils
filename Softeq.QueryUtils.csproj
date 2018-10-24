@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Softeq.QueryUtils</AssemblyName>
     <RootNamespace>Softeq.QueryUtils</RootNamespace>
-    <Version>1.0.0</Version>
-    <Description></Description>
+    <Version>1.0.1</Version>
+    <Description>.Net Standard library for working with queries. The library helps you to perform such operations like ordering, filtering and paging.</Description>
     <Authors>Softeq Development Corp.</Authors>
     <Company>Softeq Development Corp.</Company>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
