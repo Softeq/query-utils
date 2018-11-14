@@ -23,6 +23,11 @@ namespace Softeq.QueryUtils
         public int? TotalNumberOfPages { get; set; }
 
         /// <summary>
+        /// The total number of records available.
+        /// </summary>
+        public int? TotalNumberOfItems { get; set; }
+
+        /// <summary>
         /// The records this page represents.
         /// </summary>
         public IEnumerable<T> Results { get; set; }

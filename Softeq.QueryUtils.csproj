@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Softeq.QueryUtils</AssemblyName>
     <RootNamespace>Softeq.QueryUtils</RootNamespace>
-    <Version>1.0.2</Version>
+    <Version>1.0.3-alpha</Version>
     <Description>.Net Standard library for working with queries. The library helps you to perform such operations like ordering, filtering and paging.</Description>
     <Authors>Softeq Development Corp.</Authors>
     <Company>Softeq Development Corp.</Company>
