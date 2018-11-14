@@ -34,7 +34,8 @@ namespace Softeq.QueryUtils
                 Results = results,
                 PageNumber = page,
                 PageSize = results.Count(),
-                TotalNumberOfPages = totalPageCount
+                TotalNumberOfPages = totalPageCount,
+                TotalNumberOfItems = totalNumberOfRecords
             };
         }
 
@@ -61,7 +62,8 @@ namespace Softeq.QueryUtils
                 Results = results,
                 PageNumber = page,
                 PageSize = results.Count(),
-                TotalNumberOfPages = totalPageCount
+                TotalNumberOfPages = totalPageCount,
+                TotalNumberOfItems = totalNumberOfRecords
             };
         }
 
@@ -84,7 +86,8 @@ namespace Softeq.QueryUtils
                 Results = projection,
                 PageNumber = page,
                 PageSize = projection.Count(),
-                TotalNumberOfPages = totalPageCount
+                TotalNumberOfPages = totalPageCount,
+                TotalNumberOfItems = totalNumberOfRecords
             };
         }
     }
