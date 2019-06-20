@@ -47,7 +47,7 @@ Using in code
         PageSize = 2,
         Filters = new List<Filter> { new Filter { PropertyName = "PropertyName", Value = "Value" } },
         Sort = new Sort { PropertyName = "PropertyName", Order = SortOrder.Asc }
-     };
+      };
 ```
 ```csharp
  var result = await _profileService.GetProfilesAsync(getProfilesRequest);
@@ -66,4 +66,4 @@ We specialize in .NET core applications.
 We welcome any contributions.
 
 ## License
-The Query Utils project is available for free use, as described by the [LICENSE](/LICENSE) (MIT).
+The **Query Utils** project is available for free use, as described by the [LICENSE](/LICENSE) (MIT).
