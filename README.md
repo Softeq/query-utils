@@ -8,10 +8,29 @@ Query Utils extensions for IQueryable to perform Paging, Filer, Sorting
 ## Usage
 Query Utils has interfaces:
 - IPagedQuery - pagination results
+```csharp
+    public interface IPagedQuery
+    {
+        int Page { get; set; }
+        int PageSize { get; set; }
+    }
+```
 - IFilteredQuery - filter results in query
+```csharp
+    public interface IFilteredQuery
+    {
+        ICollection<Filter> Filters { get; set; }
+    }
+```
 - ISortedQuery - sorting results in query
+```csharp
+    public interface ISortedQuery
+    {
+        Sort Sort { get; set; }
+    }
+```
 
-Query class
+Using in code
 ```csharp
     public class GetProfilesQuery : IPagedQuery, IFilteredQuery, ISortedQuery
     {
@@ -21,16 +40,17 @@ Query class
         public Sort Sort { get; set; }
     }
 ```
-Using in code
 ```csharp
-var filters = query.CreateFilters();
-var ordering = query.CreateOrdering();
-
-var querySpecification = new QuerySpecification<UserProfile>()
-                .WithFilters(filters)
-                .WithOrdering(ordering);
-
-var profiles = UnitOfWork.UserProfileRepository.GetAll();
+     var getProfilesRequest = new GetProfilesQuery
+     {
+        Page = 1,
+        PageSize = 2,
+        Filters = new List<Filter> { new Filter { PropertyName = "PropertyName", Value = "Value" } },
+        Sort = new Sort { PropertyName = "PropertyName", Order = SortOrder.Asc }
+     };
+```
+```csharp
+ var result = await _profileService.GetProfilesAsync(getProfilesRequest);
 ```
 
 ## About
@@ -43,9 +63,7 @@ We specialize in .NET core applications.
  - [Vk](https://vk.com/club21079655)
 
 ## Contributing
-
 We welcome any contributions.
 
 ## License
-
 The Query Utils project is available for free use, as described by the [LICENSE](/LICENSE) (MIT).
