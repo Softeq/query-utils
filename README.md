@@ -3,30 +3,44 @@
 
 # Query Utils
 
-Query Utils extensions for IQueryable to perform Paging, Filer, Sorting
+Query Utils is extension for IQueryable to perform Paging, Filer and Sorting operations
 
 ## Usage
 Query Utils extension currently supports the following types of data manipulations, which you may implement in your query:
-- **IPagedQuery** (allows you to get a sample of data spitted by pages)
+- **IPagedQuery** (allows you to get a sample of data splitted by pages)
 - **IFilteredQuery** (allows to set collection of filters in request)
 - **ISortedQuery** (allows `ASC/DESC` ordering response data by definite property)
 
-Query implementation:
 ```csharp
-    public class GetProfilesQuery : IPagedQuery, IFilteredQuery, ISortedQuery
-    {
-        public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 20;
-        public ICollection<Filter> Filters { get; set; }
-        public Sort Sort { get; set; }
-    }
+public class UserProfile
+{
+    [JsonProperty("id")]
+    public Guid Id { get; set; }
+
+    [JsonProperty("firstName")]
+    public string FirstName { get; set; }
+}
 ```
-Filtering:
+
+Query implementation:
+
+```csharp
+public class GetProfilesQuery : IPagedQuery, IFilteredQuery, ISortedQuery
+{
+	public int Page { get; set; } = 1;
+	public int PageSize { get; set; } = 20;
+	public ICollection<Filter> Filters { get; set; }
+	public Sort Sort { get; set; }
+}
+```
+
+Implement the following extension method for filtering:
+
 ```csharp
 public static IEnumerable<Func<IQueryable<UserProfile>, IQueryable<UserProfile>>> CreateFilters(this GetProfilesQuery query)
 {
     var filters = new List<Func<IQueryable<UserProfile>, IQueryable<UserProfile>>>();
-    var map = typeof(ProfileResponse).GetProperties()
+    var map = typeof(UserProfile).GetProperties()
             .Where(x => x.GetCustomAttribute<JsonPropertyAttribute>() != null)
             .ToLookup(x => x.GetCustomAttribute<JsonPropertyAttribute>().PropertyName);
 
@@ -42,7 +56,7 @@ public static IEnumerable<Func<IQueryable<UserProfile>, IQueryable<UserProfile>>
 
             switch (property.Name)
             {
-                case nameof(ProfileResponse.FirstName):
+                case nameof(UserProfile.FirstName):
                 {
                     filters.Add(x => x.Where(e => e.FirstName.Contains(filter.Value)));
                     break;
@@ -55,7 +69,9 @@ public static IEnumerable<Func<IQueryable<UserProfile>, IQueryable<UserProfile>>
      return filters;
 }
 ```
-Sorting:
+
+Implement the following extension method for sorting:
+
 ```csharp
 public static Func<IQueryable<UserProfile>, IQueryable<UserProfile>> CreateOrdering(this GetProfilesQuery query)
 {
@@ -63,7 +79,7 @@ public static Func<IQueryable<UserProfile>, IQueryable<UserProfile>> CreateOrder
 
     if (query.Sort != null)
     {
-        var map = typeof(ProfileResponse).GetProperties()
+        var map = typeof(UserProfile).GetProperties()
                .Where(x => x.GetCustomAttribute<JsonPropertyAttribute>() != null)
                .ToLookup(x => x.GetCustomAttribute<JsonPropertyAttribute>().PropertyName);
 
@@ -77,7 +93,7 @@ public static Func<IQueryable<UserProfile>, IQueryable<UserProfile>> CreateOrder
 
         switch (property.Name)
         {
-            case nameof(ProfileResponse.FirstName):
+            case nameof(UserProfile.FirstName):
             {
                 sortExpression = x => x.FirstName;
                 break;
@@ -94,6 +110,19 @@ public static Func<IQueryable<UserProfile>, IQueryable<UserProfile>> CreateOrder
 }
 ```
 
+Usage example:
+
+```csharp
+var filters = request.Query.CreateFilters();
+var ordering = request.Query.CreateOrdering();
+
+var filteredProfiles = new QuerySpecification<UserProfile>()
+	.WithFilters(filters)
+	.WithOrdering(ordering)
+	.ApplyFiltering(profiles);
+
+return PageUtil.CreatePagedResults(filteredProfiles, request.Query.Page, request.Query.PageSize, Mapper.Map<UserProfile, ProfileResponse>);
+```
 
 ## About
 This project is maintained by [Softeq Development Corp.](https://www.softeq.com/)
